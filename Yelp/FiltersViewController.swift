@@ -8,9 +8,15 @@
 
 import UIKit
 
+@objc protocol FiltersViewControllerDelegate {
+  @objc optional func filtersViewController(_ filtersViewController: FiltersViewController, didUpdateFilters filters: [String:AnyObject])
+}
+
 class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwitchCellDelegate {
   
   @IBOutlet weak var tableView: UITableView!
+  
+  weak var delegate: FiltersViewControllerDelegate?
   
   var categories: [[String:String]]!
   var switchStates = [Int:Bool]()
@@ -51,6 +57,21 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   }
   @IBAction func onSearchButton(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
+    var filters = [String:AnyObject]()
+    
+    var selectedCategories = [String]()
+    for (row, isSelected) in switchStates {
+      if isSelected {
+        selectedCategories.append(categories[row]["code"]!)
+      }
+    }
+    
+    if selectedCategories.count > 0 {
+      filters["categories"] = selectedCategories as AnyObject
+    }
+    
+    delegate?.filtersViewController?(self, didUpdateFilters: filters)
+    
   }
   
   func yelpCategories() -> [[String:String]] {
