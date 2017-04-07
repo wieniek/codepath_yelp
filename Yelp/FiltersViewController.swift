@@ -18,7 +18,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   
   weak var delegate: FiltersViewControllerDelegate?
   
-  var switchStates = [Int:Bool]()
+  var switchStates = [IndexPath:Bool]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,7 +47,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
       break
     }
     cell.delegate = self
-    cell.onSwitch.isOn = switchStates[indexPath.row] ?? false
+    cell.onSwitch.isOn = switchStates[indexPath] ?? false
     return cell
   }
   
@@ -79,7 +79,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   // impement delegate method
   func switchCell(_ switchCell: SwitchCell, didChangeValue value: Bool) {
     let indexPath = tableView.indexPath(for: switchCell)!
-    switchStates[indexPath.row] = value
+    switchStates[indexPath] = value
   }
   
   @IBAction func onCancelButton(_ sender: UIBarButtonItem) {
@@ -91,19 +91,44 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var selectedCategories = [String]()
     
-    for (row, isSelected) in switchStates {
-      if row > 0 && isSelected {
-        selectedCategories.append(Constants.Yelp.categories[row]["code"]!)
+    for (indexPath, isSelected) in switchStates {
+      if indexPath.section == 3 && isSelected {
+        selectedCategories.append(Constants.Yelp.categories[indexPath.row]["code"]!)
       }
     }
     
-    // First switch is labeled "Offering a Deal"
-    filters["deals"] = switchStates[0] as AnyObject
-    
-    filters["radius_filter"] = 1000 as AnyObject
-    
     if selectedCategories.count > 0 {
       filters["categories"] = selectedCategories as AnyObject
+    }
+    
+    // First switch labeled "Offering a Deal"
+    filters["deals"] = switchStates[IndexPath(row: 0, section: 0)] as AnyObject
+    
+    print("Swiches = \(switchStates)")
+    
+    // Switch in section 1 row 0 is 0.3 miles = 483 meters
+    // Switch in section 1 row 1 is 1 mile = 1609 meters
+    // Switch in section 1 row 2 is 5 miles = 8047 meters
+    // Switch in section 1 row 3 is 20 miles = 32187 meters
+    var distance: Int?
+    if switchStates[IndexPath(row: 0, section: 1)] != nil { distance = 483 } else
+      if switchStates[IndexPath(row: 1, section: 1)] != nil { distance = 1609 } else
+        if switchStates[IndexPath(row: 2, section: 1)] != nil { distance = 8047 } else
+          if switchStates[IndexPath(row: 3, section: 1)] != nil { distance = 32187 }
+    
+    if distance != nil {
+      print("Distance = \(distance!)")
+      filters["radius"] = distance as AnyObject
+    }
+    
+    var sortMode: YelpSortMode?
+    if switchStates[IndexPath(row: 0, section: 2)] != nil { sortMode = YelpSortMode.bestMatched } else
+      if switchStates[IndexPath(row: 1, section: 2)] != nil { sortMode = YelpSortMode.distance } else
+        if switchStates[IndexPath(row: 2, section: 2)] != nil { sortMode = YelpSortMode.highestRated }
+    
+    if sortMode != nil {
+      print("Sort Mode = \(sortMode!)")
+      filters["sort"] = sortMode as AnyObject
     }
     
     delegate?.filtersViewController?(self, didUpdateFilters: filters)
