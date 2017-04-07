@@ -24,7 +24,6 @@ class SwitchCell: UITableViewCell {
     
     // hook to UI switch programatically, add target
     onSwitch.addTarget(self, action: #selector(SwitchCell.switchValueChanged), for: UIControlEvents.valueChanged)
-    
   }
   
   // action for the UI switch
@@ -32,6 +31,7 @@ class SwitchCell: UITableViewCell {
     print("switch value changed")
       delegate?.switchCell?(self, didChangeValue: onSwitch.isOn)
   }
+  
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)

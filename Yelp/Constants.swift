@@ -18,10 +18,17 @@ struct Constants {
   
   struct Yelp {
     static let categories = [
-      ["name" : "Soup", "code" : "soup"],
-      ["name" : "Thai", "code" : "thai"],
+      ["name" : "American","code": "tradamerican"],
+      ["name" : "Burgers","code": "burgers"],
+      ["name" : "Chinese","code": "chinese"],
+      ["name" : "Greek","code": "greek"],
+      ["name" : "Mexican","code": "mexican"],
+      ["name" : "Irish", "code" : "irish"],
+      ["name" : "Pizza", "code" : "pizza"],
+      ["name" : "Salad", "code" : "salad"],
       ["name" : "Seafood", "code" : "seafood"],
-      ["name" : "Irish", "code" : "irish"]
+      ["name" : "Soup", "code" : "soup"],
+      ["name" : "Thai", "code" : "thai"]
     ]
   }
 }
