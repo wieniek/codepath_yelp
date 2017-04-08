@@ -20,61 +20,147 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   
   var switchStates = [IndexPath:Bool]()
   
-  var expandDistanceFilter = false
+  var sectionCollapseStates = [Bool]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     tableView.delegate = self
     tableView.dataSource = self
+    
+    // Initialize section collapsible states
+    var sectionNumber = 0
+    for section in Constants.filtersSections {
+      sectionCollapseStates.append(section.collapsible)
+      // if section is collapsible then set first row as selected
+      if section.collapsible {
+        switchStates[IndexPath(row:0, section: sectionNumber)] = true
+      }
+      sectionNumber += 1
+    }
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("did select row")
+    //print("did select section  = \(indexPath.section)")
+    //print("did select row  = \(indexPath.row)")
+    //print("did select section is \(sectionCollapseStates[indexPath.section])")
+    
+    //print("did set to true:")
+    //print("section  = \(indexPath.section)")
+    //print("row  = \(indexPath.row)")
+    
+    
+    if Constants.filtersSections[indexPath.section].collapsible {
+      
+      // modify switch state only if section is not collapsed
+      if !sectionCollapseStates[indexPath.section] {
+        
+        var rowNumber = 0
+        // set all section switches to off
+        for _ in Constants.filtersSections[indexPath.section].cellLabels {
+          switchStates[IndexPath(row: rowNumber, section: indexPath.section)] = false
+          rowNumber += 1
+        }
+        
+        switchStates[indexPath] = true
+        
+      }
+      
+      
+      sectionCollapseStates[indexPath.section] = !sectionCollapseStates[indexPath.section]
+      tableView.reloadData()
+    }
+    
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
-    cell.switchLabel.text = Constants.Filters.cellLabels[indexPath.section][indexPath.row]
+    
+    // clear values to avoid reuse effect
+    cell.accessoryType = .none
+    cell.switchLabel.text = nil
+    cell.onSwitch.isOn = false
+    cell.onSwitch.isHidden = false
+    
+    
+    if Constants.filtersSections[indexPath.section].collapsible {
+      
+      //print("ACC- INDEX PATH = \(indexPath)")
+      //print("ACC- STATES = \(switchStates[indexPath])")
+      
+      
+      // if section is collapsible then hide switch and show checkmark if selected
+      cell.onSwitch.isHidden = true
+      if let switchState = switchStates[indexPath]  {
+        if switchState {
+          
+          
+          cell.accessoryType = .checkmark
+        }
+      }
+      
+      
+      // if section collapse state is true, then show selected row and checkmark
+      if sectionCollapseStates[indexPath.section] {
+        
+        let selectedRows = switchStates.filter { $1 == true }
+        let selectedRowInSection = selectedRows.filter { $0.key.section == indexPath.section }[0].key
+        //print("selected cell index = \(selectedIndex)")
+        //print("selected cell text = \(Constants.filtersSections[indexPath.section].cellLabels[selectedIndex.row])")
+        
+        cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[selectedRowInSection.row]
+        cell.accessoryType = .checkmark
+      } else {
+        
+        cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[indexPath.row]
+        
+      }
+      
+    } else {
+      // section is not collapsible
+      cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[indexPath.row]
+      cell.onSwitch.isOn = switchStates[indexPath] ?? false
+    }
+    
+    
+    
+    
     cell.delegate = self
-    cell.onSwitch.isOn = switchStates[indexPath] ?? false
+    
+    //    print("INDEX PATH = \(indexPath)")
+    //    print("STATES = \(switchStates[indexPath])")
+    
     return cell
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    switch section {
-    case 0:
-      return Constants.Filters.cellLabels[section].count
-    case 1:
-      if expandDistanceFilter {
-        return Constants.Filters.cellLabels[section].count
-      } else {
-        return 1
-      }
-    case 2:
-      return Constants.Filters.cellLabels[section].count
-    case 3:
-      return Constants.Yelp.categories.count
-    default:
-      return 0
+    // if section collapse state is true, then set number of rows to 1
+    if sectionCollapseStates[section] {
+      return 1
+    } else {
+      return Constants.filtersSections[section].cellLabels.count
     }
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return Constants.Filters.headerTitles.count
+    return Constants.filtersSections.count
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     
-    return Constants.Filters.headerTitles[section]
+    return Constants.filtersSections[section].title
   }
   
   // impement delegate method
   func switchCell(_ switchCell: SwitchCell, didChangeValue value: Bool) {
     let indexPath = tableView.indexPath(for: switchCell)!
-    switchStates[indexPath] = value
+    
+    // only chcnge switch state if section is not collapsed
+    if Constants.filtersSections[indexPath.section].collapsible && sectionCollapseStates[indexPath.section] == true  {
+      switchStates[indexPath] = value
+    }
   }
   
   @IBAction func onCancelButton(_ sender: UIBarButtonItem) {
@@ -99,7 +185,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     // First switch labeled "Offering a Deal"
     filters["deals"] = switchStates[IndexPath(row: 0, section: 0)] as AnyObject
     
-    print("Swiches = \(switchStates)")
+    //print("Swiches = \(switchStates)")
     
     // Switch in section 1 row 0 is 0.3 miles = 483 meters
     // Switch in section 1 row 1 is 1 mile = 1609 meters
