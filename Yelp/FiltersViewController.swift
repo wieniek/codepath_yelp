@@ -20,6 +20,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   
   var switchStates = [IndexPath:Bool]()
   
+  var expandDistanceFilter = false
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -34,18 +36,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
-    switch indexPath.section {
-    case 0:
-      cell.switchLabel.text = Constants.Filters.dealLabel
-    case 1:
-      cell.switchLabel.text = Constants.Filters.distanceOptions[indexPath.row]
-    case 2:
-      cell.switchLabel.text = Constants.Filters.sortOptions[indexPath.row]
-    case 3:
-      cell.switchLabel.text = Constants.Yelp.categories[indexPath.row]["name"]
-    default:
-      break
-    }
+    cell.switchLabel.text = Constants.Filters.cellLabels[indexPath.section][indexPath.row]
     cell.delegate = self
     cell.onSwitch.isOn = switchStates[indexPath] ?? false
     return cell
@@ -55,11 +46,15 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     switch section {
     case 0:
-      return 1
+      return Constants.Filters.cellLabels[section].count
     case 1:
-      return 4
+      if expandDistanceFilter {
+        return Constants.Filters.cellLabels[section].count
+      } else {
+        return 1
+      }
     case 2:
-      return 3
+      return Constants.Filters.cellLabels[section].count
     case 3:
       return Constants.Yelp.categories.count
     default:
@@ -68,7 +63,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 4
+    return Constants.Filters.headerTitles.count
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

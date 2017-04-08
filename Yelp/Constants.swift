@@ -8,12 +8,30 @@
 
 import Foundation
 
+struct FiltersSection {
+  let title: String?
+  let cellLabels: [String]
+  let collapsible: Bool
+}
+
 struct Constants {
+  
+  static let filtersSections = [
+    FiltersSection( title: nil, cellLabels: ["Offering a Deal"], collapsible: false),
+    FiltersSection( title: "Distance", cellLabels: ["Auto","0.3 miles", "1 mile", "5 miles", "20 miles"], collapsible: true),
+    FiltersSection( title: "Sort By", cellLabels: ["Best match", "Distance", "Highest rated"], collapsible: false),
+    FiltersSection( title: "Category", cellLabels: Yelp.categories.map { $0["name"]! }, collapsible: false),
+  ]
+  
   struct Filters {
     static let headerTitles = [nil, "Distance", "Sort By", "Category"]
-    static let distanceOptions = ["0.3 miles", "1 mile", "5 miles", "20 miles"]
-    static let sortOptions = ["Best match", "Distance", "Highest rated"]
-    static let dealLabel = "Offering a Deal"
+
+    static let cellLabels = [
+      ["Offering a Deal"],
+      ["Auto","0.3 miles", "1 mile", "5 miles", "20 miles"],
+      ["Best match", "Distance", "Highest rated"],
+      Yelp.categories.map { $0["name"]! }
+    ]
   }
   
   struct Yelp {
