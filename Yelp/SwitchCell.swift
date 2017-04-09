@@ -27,7 +27,6 @@ enum cellIconType: String {
 class SwitchCell: UITableViewCell {
   
   @IBOutlet weak var switchLabel: UILabel!
-  //@IBOutlet weak var onSwitch: UISwitch!
   @IBOutlet weak var switchImage: UIImageView!
   @IBOutlet weak var onSwitch: SevenSwitch!
   

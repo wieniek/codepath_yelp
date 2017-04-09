@@ -17,6 +17,7 @@
 		22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */; };
 		31D95BCBCA38716181E686D3 /* Pods_Yelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */; };
 		47848697133B87663A122E3D /* Pods_YelpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1000F3975EB43318C1D4FA /* Pods_YelpTests.framework */; };
+		F402DEDA1E9A70F500967621 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F402DED91E9A70F500967621 /* DetailsViewController.swift */; };
 		F41227F11E96D8C600C1D5E6 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41227F01E96D8C600C1D5E6 /* SwitchCell.swift */; };
 		F41227F31E96DBD300C1D5E6 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41227F21E96DBD300C1D5E6 /* FiltersViewController.swift */; };
 		F493BDFD1E97DAF200312A33 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493BDFC1E97DAF200312A33 /* Constants.swift */; };
@@ -53,6 +54,7 @@
 		AA3C5CF4FD317D72ABE2AAC4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF53DC2D7A8303A68532E7C6 /* Pods-Yelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.debug.xcconfig"; sourceTree = "<group>"; };
+		F402DED91E9A70F500967621 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		F41227F01E96D8C600C1D5E6 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		F41227F21E96DBD300C1D5E6 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		F493BDFC1E97DAF200312A33 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */,
 				F41227F21E96DBD300C1D5E6 /* FiltersViewController.swift */,
+				F402DED91E9A70F500967621 /* DetailsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 			files = (
 				F4D9B2101E961F970068169D /* BusinessCell.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
+				F402DEDA1E9A70F500967621 /* DetailsViewController.swift in Sources */,
 				F41227F31E96DBD300C1D5E6 /* FiltersViewController.swift in Sources */,
 				22AAAA991AEA0A9700A544AF /* Business.swift in Sources */,
 				222D8A7D19CCFAE000D2DB53 /* YelpClient.swift in Sources */,
