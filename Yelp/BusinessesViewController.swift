@@ -27,7 +27,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     searchBar.delegate = self
     
     // add searchbar to top navigation bar
-    searchBar.placeholder = "search for food..."
+    searchBar.placeholder = "Restaurant name..."
     navigationItem.titleView = self.searchBar
     
     Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
@@ -83,6 +83,11 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
     cell.business = businessesFiltered[indexPath.row]
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // Get rid of the gray selection effect by deselecting the cell
+    tableView.deselectRow(at: indexPath, animated: true)
   }
   
   override func didReceiveMemoryWarning() {

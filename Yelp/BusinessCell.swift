@@ -39,6 +39,8 @@ class BusinessCell: UITableViewCell {
     // Initialization code
     thumbImageView.layer.cornerRadius = 3
     thumbImageView.clipsToBounds = true
+    // No color when the user selects cell
+    selectionStyle = .none
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {

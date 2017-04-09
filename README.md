@@ -33,24 +33,25 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Spent some time refactoring the code to filter out rows selected by user in [IndexPath:Bool] array using .filter function.
+- [x] Refactored SwitchCell class using enums.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. How to add simple constrains in code. For example when creating custom table view cells.
+2. Review examples of closures, like the ones in searchWithTerm() method parameters.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/Y2B38Dv.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Could not get the infinite scrolling to work. Had errors in the search closure. Will report the error in the discussion forum.
 
 ## License
 

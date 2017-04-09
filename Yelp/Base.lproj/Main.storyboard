@@ -195,9 +195,7 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
                                                             <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
-                                                            <color key="value" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="onImage" value="switchOn"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -427,6 +425,7 @@
     </scenes>
     <resources>
         <image name="YelpThumb" width="25" height="25"/>
+        <image name="switchOn" width="64" height="29"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
