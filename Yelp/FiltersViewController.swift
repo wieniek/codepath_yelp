@@ -73,8 +73,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     if Constants.filtersSections[indexPath.section].collapsible {
       
-      // if section is collapsible then hide switch and show appropriate icon
-      //cell.onSwitch.isHidden = true
+      // if section is collapsible then set cell type and show appropriate icon
       cell.type = .checkmark
       cell.iconType = .uncheck
       if let switchState = switchStates[indexPath]  {
@@ -122,11 +121,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   // impement delegate method
   func switchCell(_ switchCell: SwitchCell, didChangeValue value: Bool) {
     let indexPath = tableView.indexPath(for: switchCell)!
-    
-    // only chcnge switch state if section is not collapsed
-    if Constants.filtersSections[indexPath.section].collapsible && sectionCollapseStates[indexPath.section] == true  {
-      switchStates[indexPath] = value
-    }
+    switchStates[indexPath] = value
   }
   
   @IBAction func onCancelButton(_ sender: UIBarButtonItem) {
@@ -151,32 +146,37 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     // First switch labeled "Offering a Deal"
     filters["deals"] = switchStates[IndexPath(row: 0, section: 0)] as AnyObject
     
-    //print("Swiches = \(switchStates)")
+    // Distance is displayed in section 1, find selected row
+    let selectedRows = switchStates.filter { $1 == true }
+    let selectedRowInSection1 = selectedRows.filter { $0.key.section == 1 }[0].key.row
     
-    // Switch in section 1 row 0 is 0.3 miles = 483 meters
-    // Switch in section 1 row 1 is 1 mile = 1609 meters
-    // Switch in section 1 row 2 is 5 miles = 8047 meters
-    // Switch in section 1 row 3 is 20 miles = 32187 meters
-    var distance: Int?
-    if switchStates[IndexPath(row: 0, section: 1)] != nil { distance = 483 } else
-      if switchStates[IndexPath(row: 1, section: 1)] != nil { distance = 1609 } else
-        if switchStates[IndexPath(row: 2, section: 1)] != nil { distance = 8047 } else
-          if switchStates[IndexPath(row: 3, section: 1)] != nil { distance = 32187 }
+    var distance = 0
+    switch selectedRowInSection1 {
+    case 0: distance = 0          // Distance = Auto
+    case 1: distance = 483        // Distance = 0.3 miles = 483 meters
+    case 2: distance = 1609       // Distance = 1 mile = 1609 meters
+    case 3: distance = 8047       // Distance = 5 miles = 8047 meters
+    case 4: distance = 32187      // Distance = 20 miles = 32187 meters
+    default: break
+    }
     
-    if distance != nil {
-      print("Distance = \(distance!)")
+    // Add distance radius if not Auto
+    if distance != 0 {
       filters["radius"] = distance as AnyObject
     }
     
-    var sortMode: YelpSortMode?
-    if switchStates[IndexPath(row: 0, section: 2)] != nil { sortMode = YelpSortMode.bestMatched } else
-      if switchStates[IndexPath(row: 1, section: 2)] != nil { sortMode = YelpSortMode.distance } else
-        if switchStates[IndexPath(row: 2, section: 2)] != nil { sortMode = YelpSortMode.highestRated }
+    // Sort mode is displayed in section 2, find selected row
+    let selectedRowInSection2 = selectedRows.filter { $0.key.section == 1 }[0].key.row
     
-    if sortMode != nil {
-      print("Sort Mode = \(sortMode!)")
-      filters["sort"] = sortMode as AnyObject
+    var sortMode: YelpSortMode?
+    switch selectedRowInSection2 {
+    case 0: sortMode = YelpSortMode.bestMatched
+    case 1: sortMode = YelpSortMode.distance
+    case 2: sortMode = YelpSortMode.highestRated
+    default: break
     }
+    
+    filters["sort"] = sortMode as AnyObject
     
     delegate?.filtersViewController?(self, didUpdateFilters: filters)
   }
