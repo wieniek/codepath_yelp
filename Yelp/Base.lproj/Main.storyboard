@@ -170,9 +170,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o1f-Vo-HUb">
-                                                    <rect key="frame" x="318" y="10" width="51" height="31"/>
-                                                </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwT-cB-xFf">
                                                     <rect key="frame" x="8" y="15" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -183,16 +180,28 @@
                                                     <rect key="frame" x="339" y="13" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ih4-7a-d6U" customClass="SevenSwitch" customModule="SevenSwitch">
+                                                    <rect key="frame" x="305" y="11" width="62" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="thumbImage" value="YelpThumb"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
+                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                            <color key="value" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="o1f-Vo-HUb" secondAttribute="trailing" constant="8" id="Txp-9Z-FJQ"/>
                                                 <constraint firstItem="kwT-cB-xFf" firstAttribute="centerY" secondItem="GUE-tw-RlZ" secondAttribute="centerY" id="Yuh-DR-laG"/>
                                                 <constraint firstItem="kwT-cB-xFf" firstAttribute="leading" secondItem="GUE-tw-RlZ" secondAttribute="leading" constant="8" id="dKq-IR-A2o"/>
-                                                <constraint firstItem="o1f-Vo-HUb" firstAttribute="centerY" secondItem="GUE-tw-RlZ" secondAttribute="centerY" id="eup-dM-XWi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="onSwitch" destination="o1f-Vo-HUb" id="Cj5-AU-DeU"/>
+                                            <outlet property="onSwitch" destination="ih4-7a-d6U" id="6j2-ev-1xE"/>
                                             <outlet property="switchImage" destination="vXZ-e6-d1p" id="Mdk-Ty-9Bt"/>
                                             <outlet property="switchLabel" destination="kwT-cB-xFf" id="Cf8-Sr-fCx"/>
                                         </connections>
@@ -265,6 +274,9 @@
             <point key="canvasLocation" x="2247.5" y="400.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="YelpThumb" width="25" height="25"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

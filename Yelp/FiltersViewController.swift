@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SevenSwitch
 
 @objc protocol FiltersViewControllerDelegate {
   @objc optional func filtersViewController(_ filtersViewController: FiltersViewController, didUpdateFilters filters: [String:AnyObject])

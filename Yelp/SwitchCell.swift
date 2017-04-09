@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SevenSwitch
 
 enum cellType {
   case checkmark
@@ -26,11 +27,14 @@ enum cellIconType: String {
 class SwitchCell: UITableViewCell {
   
   @IBOutlet weak var switchLabel: UILabel!
-  @IBOutlet weak var onSwitch: UISwitch!
+  //@IBOutlet weak var onSwitch: UISwitch!
   @IBOutlet weak var switchImage: UIImageView!
+  @IBOutlet weak var onSwitch: SevenSwitch!
+  
+  
   
   weak var delegate: SwitchCellDelegate?
-  
+    
   // cell label sets UILabel.text
   var label = "" {
     didSet {
@@ -42,9 +46,11 @@ class SwitchCell: UITableViewCell {
   var switchOn = false {
     didSet {
       if switchOn {
-        onSwitch.isOn = true
+        //onSwitch.isOn = true
+        onSwitch.on = true
       } else {
-        onSwitch.isOn = false
+        //onSwitch.isOn = false
+        onSwitch.on = false
       }
     }
   }
@@ -81,7 +87,7 @@ class SwitchCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+        
     // hook to UI switch programatically, add target
     onSwitch.addTarget(self, action: #selector(SwitchCell.switchValueChanged), for: UIControlEvents.valueChanged)
   }
@@ -89,7 +95,7 @@ class SwitchCell: UITableViewCell {
   // action for the UI switch
   func switchValueChanged() {
     //print("switch value changed")
-    delegate?.switchCell?(self, didChangeValue: onSwitch.isOn)
+    delegate?.switchCell?(self, didChangeValue: onSwitch.isOn())
   }
   
   
