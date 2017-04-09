@@ -22,18 +22,7 @@ struct Constants {
     FiltersSection( title: "Sort By", cellLabels: ["Best match", "Distance", "Highest rated"], collapsible: true),
     FiltersSection( title: "Category", cellLabels: Yelp.categories.map { $0["name"]! }, collapsible: false),
   ]
-  
-//  struct Filters {
-//    static let headerTitles = [nil, "Distance", "Sort By", "Category"]
-//
-//    static let cellLabels = [
-//      ["Offering a Deal"],
-//      ["Auto","0.3 miles", "1 mile", "5 miles", "20 miles"],
-//      ["Best match", "Distance", "Highest rated"],
-//      Yelp.categories.map { $0["name"]! }
-//    ]
-//  }
-  
+    
   struct Yelp {
     static let categories = [
       ["name" : "American","code": "tradamerican"],

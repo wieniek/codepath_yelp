@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum cellType {
+  case checkmark
+  case onswitch
+}
+
 enum cellIconType: String {
   case check = "Check"
   case uncheck = "Uncheck"
@@ -26,6 +31,37 @@ class SwitchCell: UITableViewCell {
   
   weak var delegate: SwitchCellDelegate?
   
+  // cell label sets UILabel.text
+  var label = "" {
+    didSet {
+      switchLabel.text = label
+    }
+  }
+  
+  // cell UISwitch state
+  var switchOn = false {
+    didSet {
+      if switchOn {
+        onSwitch.isOn = true
+      } else {
+        onSwitch.isOn = false
+      }
+    }
+  }
+  
+  // hide switch if cell type is checkmark
+  var type = cellType.onswitch {
+    didSet{
+      switch type {
+      case .checkmark :
+        onSwitch.isHidden = true
+      case .onswitch :
+        onSwitch.isHidden = false
+      }
+    }
+  }
+  
+  // show icon images depending on cell state
   var iconType: cellIconType? {
     didSet{
       if let iconType = iconType {

@@ -65,21 +65,20 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
     
-    // clear values to avoid reuse effect
-    //cell.accessoryType = .none
+    // clear values to avoid cell reuse effect
     cell.iconType = nil
-    cell.switchLabel.text = nil
-    cell.onSwitch.isOn = false
-    cell.onSwitch.isHidden = false
+    cell.label = ""
+    cell.type = .onswitch
+    cell.switchOn = false
     
     if Constants.filtersSections[indexPath.section].collapsible {
       
       // if section is collapsible then hide switch and show appropriate icon
-      cell.onSwitch.isHidden = true
+      //cell.onSwitch.isHidden = true
+      cell.type = .checkmark
       cell.iconType = .uncheck
       if let switchState = switchStates[indexPath]  {
         if switchState {
-          //cell.accessoryType = .checkmark
           cell.iconType = .check
         }
       }
@@ -88,16 +87,15 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let selectedRows = switchStates.filter { $1 == true }
         let selectedRowInSection = selectedRows.filter { $0.key.section == indexPath.section }[0].key
-        cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[selectedRowInSection.row]
-        //cell.accessoryType = .checkmark
+        cell.label = Constants.filtersSections[indexPath.section].cellLabels[selectedRowInSection.row]
         cell.iconType = .dropdown
       } else {
-        cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[indexPath.row]
+        cell.label = Constants.filtersSections[indexPath.section].cellLabels[indexPath.row]
       }
     } else {
       // section is not collapsible
-      cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[indexPath.row]
-      cell.onSwitch.isOn = switchStates[indexPath] ?? false
+      cell.label = Constants.filtersSections[indexPath.section].cellLabels[indexPath.row]
+      cell.switchOn = switchStates[indexPath] ?? false
     }
     cell.delegate = self
     return cell
@@ -118,7 +116,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    
     return Constants.filtersSections[section].title
   }
   
