@@ -179,6 +179,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXZ-e6-d1p">
+                                                    <rect key="frame" x="339" y="13" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="o1f-Vo-HUb" secondAttribute="trailing" constant="8" id="Txp-9Z-FJQ"/>
@@ -189,6 +193,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="onSwitch" destination="o1f-Vo-HUb" id="Cj5-AU-DeU"/>
+                                            <outlet property="switchImage" destination="vXZ-e6-d1p" id="Mdk-Ty-9Bt"/>
                                             <outlet property="switchLabel" destination="kwT-cB-xFf" id="Cf8-Sr-fCx"/>
                                         </connections>
                                     </tableViewCell>

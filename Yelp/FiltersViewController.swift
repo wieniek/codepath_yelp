@@ -41,14 +41,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //print("did select section  = \(indexPath.section)")
-    //print("did select row  = \(indexPath.row)")
-    //print("did select section is \(sectionCollapseStates[indexPath.section])")
-    
-    //print("did set to true:")
-    //print("section  = \(indexPath.section)")
-    //print("row  = \(indexPath.row)")
-    
     
     if Constants.filtersSections[indexPath.section].collapsible {
       
@@ -61,12 +53,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
           switchStates[IndexPath(row: rowNumber, section: indexPath.section)] = false
           rowNumber += 1
         }
-        
         switchStates[indexPath] = true
-        
       }
-      
-      
       sectionCollapseStates[indexPath.section] = !sectionCollapseStates[indexPath.section]
       tableView.reloadData()
     }
@@ -78,59 +66,40 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
     
     // clear values to avoid reuse effect
-    cell.accessoryType = .none
+    //cell.accessoryType = .none
+    cell.iconType = nil
     cell.switchLabel.text = nil
     cell.onSwitch.isOn = false
     cell.onSwitch.isHidden = false
     
-    
     if Constants.filtersSections[indexPath.section].collapsible {
       
-      //print("ACC- INDEX PATH = \(indexPath)")
-      //print("ACC- STATES = \(switchStates[indexPath])")
-      
-      
-      // if section is collapsible then hide switch and show checkmark if selected
+      // if section is collapsible then hide switch and show appropriate icon
       cell.onSwitch.isHidden = true
+      cell.iconType = .uncheck
       if let switchState = switchStates[indexPath]  {
         if switchState {
-          
-          
-          cell.accessoryType = .checkmark
+          //cell.accessoryType = .checkmark
+          cell.iconType = .check
         }
       }
-      
-      
-      // if section collapse state is true, then show selected row and checkmark
+      // if section collapse state is true, then show selected row and dropdown
       if sectionCollapseStates[indexPath.section] {
         
         let selectedRows = switchStates.filter { $1 == true }
         let selectedRowInSection = selectedRows.filter { $0.key.section == indexPath.section }[0].key
-        //print("selected cell index = \(selectedIndex)")
-        //print("selected cell text = \(Constants.filtersSections[indexPath.section].cellLabels[selectedIndex.row])")
-        
         cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[selectedRowInSection.row]
-        cell.accessoryType = .checkmark
+        //cell.accessoryType = .checkmark
+        cell.iconType = .dropdown
       } else {
-        
         cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[indexPath.row]
-        
       }
-      
     } else {
       // section is not collapsible
       cell.switchLabel.text = Constants.filtersSections[indexPath.section].cellLabels[indexPath.row]
       cell.onSwitch.isOn = switchStates[indexPath] ?? false
     }
-    
-    
-    
-    
     cell.delegate = self
-    
-    //    print("INDEX PATH = \(indexPath)")
-    //    print("STATES = \(switchStates[indexPath])")
-    
     return cell
   }
   

@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum cellIconType: String {
+  case check = "Check"
+  case uncheck = "Uncheck"
+  case dropdown = "Dropdown"
+}
+
 @objc protocol SwitchCellDelegate {
   @objc optional func switchCell(_ switchCell: SwitchCell, didChangeValue value: Bool)
 }
@@ -16,8 +22,26 @@ class SwitchCell: UITableViewCell {
   
   @IBOutlet weak var switchLabel: UILabel!
   @IBOutlet weak var onSwitch: UISwitch!
+  @IBOutlet weak var switchImage: UIImageView!
   
   weak var delegate: SwitchCellDelegate?
+  
+  var iconType: cellIconType? {
+    didSet{
+      if let iconType = iconType {
+        switch iconType {
+        case .check :
+          switchImage.image = UIImage(named: "Check")
+        case .uncheck :
+          switchImage.image = UIImage(named: "Uncheck")
+        case .dropdown :
+          switchImage.image = UIImage(named: "Dropdown")
+        }
+      } else {
+        switchImage.image = nil
+      }
+    }
+  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -29,7 +53,7 @@ class SwitchCell: UITableViewCell {
   // action for the UI switch
   func switchValueChanged() {
     //print("switch value changed")
-      delegate?.switchCell?(self, didChangeValue: onSwitch.isOn)
+    delegate?.switchCell?(self, didChangeValue: onSwitch.isOn)
   }
   
   
