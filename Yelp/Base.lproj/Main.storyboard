@@ -337,6 +337,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="134" id="13g-df-eGv"/>
                                     <constraint firstItem="XvD-4Q-mZB" firstAttribute="top" secondItem="gLe-qf-oRD" secondAttribute="bottom" constant="8" id="5Bn-KT-G2i"/>
                                     <constraint firstItem="XvD-4Q-mZB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RPY-nm-nab" secondAttribute="trailing" constant="8" id="6Ap-RF-0BQ"/>
                                     <constraint firstItem="gLe-qf-oRD" firstAttribute="leading" relation="lessThanOrEqual" secondItem="cqp-5M-S0a" secondAttribute="trailing" constant="8" id="7iJ-cM-oRC"/>
@@ -355,13 +356,19 @@
                                     <constraint firstAttribute="trailing" secondItem="XvD-4Q-mZB" secondAttribute="trailing" constant="8" id="xu4-mv-blP"/>
                                 </constraints>
                             </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Sxg-Oh-Usr">
+                                <rect key="frame" x="0.0" y="206" width="375" height="461"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Sxg-Oh-Usr" firstAttribute="leading" secondItem="IcV-MU-afZ" secondAttribute="leading" id="0Hs-zA-1z5"/>
                             <constraint firstAttribute="trailing" secondItem="pDP-es-gxK" secondAttribute="trailing" id="FAH-Sr-6NL"/>
-                            <constraint firstItem="Zge-7s-2xD" firstAttribute="top" secondItem="pDP-es-gxK" secondAttribute="bottom" constant="469" id="Kha-cP-995"/>
+                            <constraint firstItem="Zge-7s-2xD" firstAttribute="top" secondItem="Sxg-Oh-Usr" secondAttribute="bottom" id="FNB-RT-baH"/>
+                            <constraint firstItem="Sxg-Oh-Usr" firstAttribute="top" secondItem="pDP-es-gxK" secondAttribute="bottom" constant="8" id="VNn-7f-fjj"/>
                             <constraint firstItem="pDP-es-gxK" firstAttribute="top" secondItem="xvL-jc-1z3" secondAttribute="bottom" id="hkS-hF-owb"/>
                             <constraint firstItem="pDP-es-gxK" firstAttribute="leading" secondItem="IcV-MU-afZ" secondAttribute="leading" id="ir1-PJ-Y8C"/>
+                            <constraint firstAttribute="trailing" secondItem="Sxg-Oh-Usr" secondAttribute="trailing" id="ith-bc-12t"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nyR-mV-A9a"/>
@@ -369,6 +376,7 @@
                         <outlet property="addressLabel" destination="XQo-7Y-09D" id="KM3-4n-JBZ"/>
                         <outlet property="categoriesLabel" destination="wla-Ch-3j6" id="UDE-4W-k86"/>
                         <outlet property="distanceLabel" destination="gLe-qf-oRD" id="rzj-bg-frw"/>
+                        <outlet property="mapView" destination="Sxg-Oh-Usr" id="s4H-Oh-IM0"/>
                         <outlet property="nameLabel" destination="cqp-5M-S0a" id="WJO-EP-LSj"/>
                         <outlet property="ratingImage" destination="OnX-sV-0BI" id="zY2-Gn-k2Z"/>
                         <outlet property="reviewsLabel" destination="RPY-nm-nab" id="c2z-7l-YCa"/>

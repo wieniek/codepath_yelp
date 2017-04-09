@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailsViewController: UIViewController {
-
+  
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var addressLabel: UILabel!
   @IBOutlet weak var categoriesLabel: UILabel!
@@ -17,9 +18,11 @@ class DetailsViewController: UIViewController {
   @IBOutlet weak var distanceLabel: UILabel!
   @IBOutlet weak var ratingImage: UIImageView!
   
+  @IBOutlet weak var mapView: MKMapView!
+  
   
   var business: Business?
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -32,6 +35,23 @@ class DetailsViewController: UIViewController {
     if let url = business?.ratingImageURL {
       ratingImage.setImageWith(url)
     }
+    
+    // set map location and add annotation
+    if let latitude = business?.latitude, let longitude = business?.longitude {
+      let centerLocation = CLLocation(latitude: latitude, longitude: longitude)
+      goToLocation(location: centerLocation)
+      let annotation = MKPointAnnotation()
+      annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+      annotation.title = business?.name ?? ""
+      mapView.addAnnotation(annotation)
+    }
+  }
+  
+  // set map location
+  func goToLocation(location: CLLocation) {
+    let span = MKCoordinateSpanMake(0.03, 0.03)
+    let region = MKCoordinateRegionMake(location.coordinate, span)
+    mapView.setRegion(region, animated: false)
   }
   
   override func didReceiveMemoryWarning() {
