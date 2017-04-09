@@ -38,22 +38,17 @@ class DetailsViewController: UIViewController {
     
     // set map location and add annotation
     if let latitude = business?.latitude, let longitude = business?.longitude {
-      let centerLocation = CLLocation(latitude: latitude, longitude: longitude)
-      goToLocation(location: centerLocation)
+      let businessLocation = CLLocation(latitude: latitude, longitude: longitude)
+      let span = MKCoordinateSpanMake(0.03, 0.03)
+      let region = MKCoordinateRegionMake(businessLocation.coordinate, span)
+      mapView.setRegion(region, animated: false)
       let annotation = MKPointAnnotation()
       annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
       annotation.title = business?.name ?? ""
       mapView.addAnnotation(annotation)
     }
   }
-  
-  // set map location
-  func goToLocation(location: CLLocation) {
-    let span = MKCoordinateSpanMake(0.03, 0.03)
-    let region = MKCoordinateRegionMake(location.coordinate, span)
-    mapView.setRegion(region, animated: false)
-  }
-  
+    
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.

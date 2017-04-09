@@ -20,6 +20,7 @@
 		F402DEDA1E9A70F500967621 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F402DED91E9A70F500967621 /* DetailsViewController.swift */; };
 		F41227F11E96D8C600C1D5E6 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41227F01E96D8C600C1D5E6 /* SwitchCell.swift */; };
 		F41227F31E96DBD300C1D5E6 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41227F21E96DBD300C1D5E6 /* FiltersViewController.swift */; };
+		F45FB4F21E9AA274002903B0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FB4F11E9AA274002903B0 /* MapViewController.swift */; };
 		F493BDFD1E97DAF200312A33 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493BDFC1E97DAF200312A33 /* Constants.swift */; };
 		F4D9B2101E961F970068169D /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9B20F1E961F970068169D /* BusinessCell.swift */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		F402DED91E9A70F500967621 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		F41227F01E96D8C600C1D5E6 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		F41227F21E96DBD300C1D5E6 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		F45FB4F11E9AA274002903B0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F493BDFC1E97DAF200312A33 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F4D9B20F1E961F970068169D /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +167,7 @@
 				22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */,
 				F41227F21E96DBD300C1D5E6 /* FiltersViewController.swift */,
 				F402DED91E9A70F500967621 /* DetailsViewController.swift */,
+				F45FB4F11E9AA274002903B0 /* MapViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				F4D9B2101E961F970068169D /* BusinessCell.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
 				F402DEDA1E9A70F500967621 /* DetailsViewController.swift in Sources */,
+				F45FB4F21E9AA274002903B0 /* MapViewController.swift in Sources */,
 				F41227F31E96DBD300C1D5E6 /* FiltersViewController.swift in Sources */,
 				22AAAA991AEA0A9700A544AF /* Business.swift in Sources */,
 				222D8A7D19CCFAE000D2DB53 /* YelpClient.swift in Sources */,

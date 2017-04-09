@@ -97,12 +97,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
       let navigationController = segue.destination as! UINavigationController
       let filtersViewController = navigationController.topViewController as! FiltersViewController
       filtersViewController.delegate = self
-    } else {
+    } else if segue.identifier == "DetailsSegue" {
       let detailsViewController = segue.destination as! DetailsViewController
       let cell = sender as! UITableViewCell
       let indexPath = tableView.indexPath(for: cell)
       let business = businessesFiltered[indexPath!.row]
       detailsViewController.business = business
+    } else if segue.identifier == "MapSegue" {
+      let mapViewController = segue.destination as! MapViewController
+      mapViewController.businesses = businesses
     }
   }
   
