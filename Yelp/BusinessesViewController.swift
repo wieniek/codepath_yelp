@@ -8,9 +8,12 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, FiltersViewControllerDelegate {
   
   var businesses: [Business]!
+  var businessesFiltered: [Business]!
+  
+  var searchBar = UISearchBar()
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -21,10 +24,16 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     tableView.dataSource = self
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 120
+    searchBar.delegate = self
+    
+    // add searchbar to top navigation bar
+    searchBar.placeholder = "search for food..."
+    navigationItem.titleView = self.searchBar
     
     Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
       
       self.businesses = businesses
+      self.businessesFiltered = businesses
       
       self.tableView.reloadData()
       
@@ -51,9 +60,20 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
   }
   
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
+    // populate businessesFiltered array based on NAME search results
+    if searchText != "" {
+      businessesFiltered = businesses.filter { String(describing: $0.name).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil}
+    } else {
+      businessesFiltered = businesses
+    }
+    tableView.reloadData()
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if businesses != nil {
-      return businesses.count
+    if businessesFiltered != nil {
+      return businessesFiltered.count
     } else {
       return 0
     }
@@ -61,7 +81,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
-    cell.business = businesses[indexPath.row]
+    cell.business = businessesFiltered[indexPath.row]
     return cell
   }
   
@@ -90,6 +110,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                             completion: {
                               (businesses: [Business]!, error: Error!) -> Void in
                               self.businesses = businesses
+                              self.businessesFiltered = businesses
                               self.tableView.reloadData() })
   }
 }
